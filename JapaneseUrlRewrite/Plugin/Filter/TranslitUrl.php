@@ -45,10 +45,7 @@ class TranslitUrl
         \Magento\Framework\Filter\TranslitUrl $filter,
         $input
     ) {
-        $decoded = urldecode($input);
-        return [
-            $decoded
-        ];
+        return $input ? [urldecode($input)] : [$input];
     }
 
     /**
