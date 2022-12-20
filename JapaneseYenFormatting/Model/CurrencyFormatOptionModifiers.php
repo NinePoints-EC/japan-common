@@ -46,7 +46,7 @@ class CurrencyFormatOptionModifiers
             case YenFormatting::KANJI:
                 return [
                     'position' => \Zend_Currency::RIGHT,
-                    'symbol' => __('Yen'),
+                    'symbol' => '円',
                 ];
             default:
                 throw new \InvalidArgumentException('Unsupported format');
