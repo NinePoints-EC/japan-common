@@ -29,7 +29,7 @@ class Transliterator
 
         foreach ($this->getTransliterators() as $transliterator) {
             $transliterated = $transliterator->transliterate($original);
-            if ($this->containsOnlyAscii($transliterated)) {
+            if (is_string($transliterated) && $this->containsOnlyAscii($transliterated)) {
                 return $transliterated;
             }
         }

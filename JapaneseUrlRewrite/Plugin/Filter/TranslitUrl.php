@@ -68,7 +68,6 @@ class TranslitUrl
             $result = $this->transliterator->transliterate($input);
         }
 
-        $encoded = urlencode($result);
-        return $encoded;
+        return $result ? urlencode($result) : $result;
     }
 }
