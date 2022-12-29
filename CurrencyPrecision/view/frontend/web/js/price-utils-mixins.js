@@ -64,26 +64,37 @@ define([
 
         // we're avoiding the usage of to fixed, and using round instead with the e representation to address
         // numbers like 1.005 = 1.01. Using ToFixed to only provide trailing zeroes in case we have a whole number
-        switch (roundMode.value) {
-            case MODES.CEILING:
-            case MODES.UP:
-                i = parseInt(
-                    amount = Number(Math.ceil(Math.abs(+amount || 0) + 'e+' + precision) + ('e-' + precision)),
-                    10
-                ) + '';
-                break;
-            case MODES.DOWN:
-            case MODES.FLOOR:
-                i = parseInt(
-                    amount = Number(Math.floor(Math.abs(+amount || 0) + 'e+' + precision) + ('e-' + precision)),
-                    10
-                ) + '';
-                break;
-            default:
-                i = parseInt(
-                    amount = Number(Math.round(Math.abs(+amount || 0) + 'e+' + precision) + ('e-' + precision)),
-                    10
-                ) + '';
+        if (
+            // Check pattern has yen character is one of (¥, 円, 元, 圆 or 圓):
+            Array.isArray(pattern.match(/\u00A5|\uFFE5|\u5186|\u5143|\u04B0|\u5706|\u5713/g)) ||
+            roundMode.code === 'JPY'
+        ) {
+            switch (roundMode.value) {
+                case MODES.CEILING:
+                case MODES.UP:
+                    i = parseInt(
+                        amount = Number(Math.ceil(Math.abs(+amount || 0) + 'e+' + precision) + ('e-' + precision)),
+                        10
+                    ) + '';
+                    break;
+                case MODES.DOWN:
+                case MODES.FLOOR:
+                    i = parseInt(
+                        amount = Number(Math.floor(Math.abs(+amount || 0) + 'e+' + precision) + ('e-' + precision)),
+                        10
+                    ) + '';
+                    break;
+                default:
+                    i = parseInt(
+                        amount = Number(Math.round(Math.abs(+amount || 0) + 'e+' + precision) + ('e-' + precision)),
+                        10
+                    ) + '';
+            }
+        } else {
+            i = parseInt(
+                amount = Number(Math.round(Math.abs(+amount || 0) + 'e+' + precision) + ('e-' + precision)),
+                10
+            ) + '';
         }
 
         pad = i.length < integerRequired ? integerRequired - i.length : 0;
@@ -106,12 +117,8 @@ define([
     }
 
     return function (object) {
-        if (roundMode.code === 'JPY') {
-            return _.extend(object, {
-                formatPrice: formatPriceEx
-            });
-        } else {
-            return object;
-        }
+        return _.extend(object, {
+            formatPrice: formatPriceEx
+        });
     }
 });

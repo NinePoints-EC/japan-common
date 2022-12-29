@@ -59,12 +59,22 @@ class Configuration extends Template
     }
 
     /**
+     * @return string
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getBaseCurrencyCode(): string
+    {
+        return $this->storeManager->getStore()->getBaseCurrencyCode();
+    }
+
+    /**
      * @return array
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getConfiguration(): array {
         return [
             'code' => $this->getCurrencyCode(),
+            'base_code' => $this->getBaseCurrencyCode(),
             'value' => $this->roundingConfig->getRoundingMode(),
         ];
     }
