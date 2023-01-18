@@ -18,4 +18,8 @@
     <type name="Magento\Tax\Pricing\Adjustment">
         <plugin name="modify_adjustment" type="CommunityEngineering\CurrencyPrecision\Plugin\Tax\Pricing\ModifyAdjustment"/>
     </type>
+    <type name="Magento\Quote\Model\Quote\Address\Total\Grand">
+        <plugin name="modify_grand_total"
+                type="CommunityEngineering\CurrencyPrecision\Plugin\Model\Quote\Address\Total\Grand"/>
+    </type>
 </config>
