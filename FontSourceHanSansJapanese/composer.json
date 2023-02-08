@@ -1,5 +1,5 @@
 {
-    "name": "community-engineering/module-font-source-han-sans-japanese",
+    "name": "ninepoints-ec/module-font-source-han-sans-japanese",
     "version": "1.0.3",
     "type": "magento2-module",
     "license": [
@@ -7,12 +7,12 @@
     ],
     "description": "Source Han Sans Japanese font for PDF generation in Magento 2.",
     "require": {
-        "php": "~7.2.0||~7.3.0||~7.4.0",
+        "php": "~7.2.0||~7.3.0||~7.4.0||~8.1.0",
         "magento/framework": "^102.0.0||^103.0.0"
     },
     "suggest": {
         "magento/module-sales": "^102.0.0||^103.0.0",
-        "community-engineering/module-configurable-pdf-font": "^1.0.0"
+        "ninepoints-ec/module-configurable-pdf-font": "^1.0.0"
     },
     "autoload": {
         "files": [
