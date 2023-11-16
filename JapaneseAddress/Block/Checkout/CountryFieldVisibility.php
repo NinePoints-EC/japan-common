@@ -76,6 +76,9 @@ class CountryFieldVisibility implements LayoutProcessorInterface
         foreach ($component['children'] as $name => $child) {
             if ($name === 'country_id') {
                 $component['children'][$name]['visible'] = $this->countryFieldConfig->isVisibleAtStorefront();
+                if ($this->countryFieldConfig->isVisibleAtStorefront()) {
+                    $component['children'][$name]['config']['disabled'] = true;
+                }
             } else {
                 $component['children'][$name] = $this->walkChildren($child);
             }

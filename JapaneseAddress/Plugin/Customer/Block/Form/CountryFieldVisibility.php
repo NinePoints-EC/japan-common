@@ -53,12 +53,10 @@ class CountryFieldVisibility
         }
 
         $hidingCssHack = 'style="display:none;visibility:hidden;height:0px;padding:0px;margin:0px;"';
-        $modifiedHtml = str_replace(
-            'class="field country required"',
-            'class="field country required" ' . $hidingCssHack,
+        return str_replace(
+            ['class="field country required"', 'id="country"'],
+            ['class="field country required" ' . $hidingCssHack, 'id="country" disabled="true"'],
             $html
         );
-
-        return $modifiedHtml;
     }
 }
