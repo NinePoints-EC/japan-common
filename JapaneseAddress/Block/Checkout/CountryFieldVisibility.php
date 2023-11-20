@@ -75,9 +75,10 @@ class CountryFieldVisibility implements LayoutProcessorInterface
 
         foreach ($component['children'] as $name => $child) {
             if ($name === 'country_id') {
-                $component['children'][$name]['visible'] = $this->countryFieldConfig->isVisibleAtStorefront();
-                if (!$this->countryFieldConfig->isVisibleAtStorefront()) {
-                    $component['children'][$name]['config']['disabled'] = true;
+                $isCountryVisible = $this->countryFieldConfig->isVisibleAtStorefront();
+                $component['children'][$name]['visible'] = $isCountryVisible;
+                if (!$isCountryVisible) {
+                    $component['children'][$name]['config']['elementTmpl'] = 'CommunityEngineering_JapaneseAddress/form/element/select-read-only';
                 }
             } else {
                 $component['children'][$name] = $this->walkChildren($child);
